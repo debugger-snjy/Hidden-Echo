@@ -14,3 +14,23 @@
     ```
 
 - In Mongoose, a "document" generally means an instance of a model. You should not have to create an instance of the Document class without going through a model.
+
+## Workflow of Registering User (Algorithm)
+- Code Should effectively handles both scenarios :
+    - Registering a new user
+    - Updating an existing but unverified user account with a new password and verification code
+
+- Flow : [Might Update the Flow Later]
+    ```js
+    IF existingUserByEmail EXISTS THEN
+        IF existingUserByEmail.isVerified THEN
+            // The User is Already Saved in the Database
+            success : false;
+        ELSE
+            // save the updated user
+        END IF
+    ELSE
+        // Create a new user with he provided details
+        // Save the New User
+    END IF
+    ```
