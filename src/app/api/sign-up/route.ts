@@ -14,7 +14,7 @@ import bcrypt from 'bcryptjs';
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 
 // Method : POST
-// Route : /api/sign-up/route.ts
+// Route : /api/sign-up
 export async function POST(nextRequest: Request) {
 
     // Connecting to the Database
@@ -31,10 +31,24 @@ export async function POST(nextRequest: Request) {
             console.log("[src/app/api/sign-up/route.ts] rawBodyData : ", rawBodyData);
         }
 
-        console.log("rawBodyData : ", rawBodyData)
+        console.log("[src/app/api/sign-up/route.ts] rawBodyData : ", rawBodyData);
 
         // Getting the Request Body Data in JSON
         const requestBody = JSON.parse(rawBodyData);
+
+        // Checking whether the JSON have Data inside it or not
+        if (Object.keys(requestBody).length === 0) {
+            console.log("[src/app/api/sign-up/route.ts] Error : No Data Found for Registering the User");
+            return Response.json(
+                {
+                    message: "No Data Found for Registering the User",
+                    success: false
+                },
+                {
+                    status: 400
+                }
+            )
+        }
 
         // Destructing the Request Body Data
         const { username, email, password } = requestBody;
