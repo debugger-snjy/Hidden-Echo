@@ -16,7 +16,9 @@ const UserSchema: Schema<User> = new Schema(
             type: String,
             required: [true, "Username is Required"],
             trim: true,
-            unique: true
+            
+            // TODO : We might need to add the unique field again
+            // unique: true
         },
         email: {
             type: String,
