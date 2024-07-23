@@ -88,3 +88,57 @@
 ## Routing in NextJS
 - If we want to group our routes in one single group, then we should use the round brackets in the folder name.
 - That rounded folder name will not be considered as the route, it will be just to make the things organized.
+
+## Debouncing Concept
+- Debouncing is a programming technique used to limit the rate at which a function is executed. It ensures that a function is only called once after a certain period of time has elapsed since the last time it was called.
+
+- This is particularly useful for handling events that may be triggered multiple times in quick succession, such as user input, window resizing, or scrolling.
+
+- When dealing with events that can fire rapidly, like key presses, mouse movements, or window resizing, calling a function for every single event can lead to performance issues and unwanted behavior.
+
+- Debouncing helps by delaying the execution of the function until the rapid events stop firing for a specified period of time.
+
+### Common Use Cases for Debouncing
+1. Search Input Fields: When a user types in a search box, you might want to wait until they stop typing before making a network request to fetch search results. Debouncing the input prevents sending multiple unnecessary requests.
+
+2. Window Resize Events: When a user resizes the browser window, you might want to perform layout calculations or make adjustments. Debouncing the resize event handler ensures that these calculations only happen after the user has finished resizing.
+
+3. Form Validation: In forms with real-time validation, you might want to validate input fields after the user stops typing, rather than on every key press.
+
+### Hooks For Debouncing
+
+- We can use the Debouncing Hooks from the [usehooks-ts](https://usehooks-ts.com/) package
+- In that Library, there are many hooks that we can use for react/next js
+- For Debouncing, we have 2 Functions Currently
+    - `useDebounceCallback`
+    - useDebounceValue
+
+#### useDebounceCallback Hook
+
+- Custom hook that creates a debounced version of a callback function.
+
+- `useDebounceCallback` is used when you want to debounce a function (callback) that gets called frequently, like an event handler.
+- The purpose is to limit the rate at which a function is invoked, ensuring it only runs after a certain amount of time has passed since the last invocation.
+
+#### useDebounceValue Hook
+
+- `useDebounceValue` is used when you want to debounce the update of a state value. It returns a debounced version of a state value that only updates after a specified delay.
+- This is useful for controlling the update frequency of state values, particularly for optimizing performance or reducing the frequency of expensive operations like API calls.
+
+### Key Differences
+
+- Purpose:
+    - useDebounceCallback: Debounces a function (callback) invocation.
+    - useDebounceValue: Debounces the update of a state value.
+
+- Usage:
+
+    - useDebounceCallback: Useful for debouncing event handlers or any function calls.
+    - useDebounceValue: Useful for debouncing state values, often used with controlled components and effects.
+
+- API:
+
+    - useDebounceCallback: Takes a callback function and a delay as arguments, returns a debounced version of the callback.
+    - useDebounceValue: Takes a state value and a delay as arguments, returns a debounced version of the state value.
+
+**_NOTE : Choosing between the two depends on your specific use case: use useDebounceCallback to control how often a function runs, and use useDebounceValue to control how often a state value updates._**
