@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,10 +18,16 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            
+
             {/* Wrapping the body inside the SessionProvider as we have to use NextAuth Authentication */}
             <AuthProvider>
-                <body className={inter.className}>{children}</body>
+                <body className={inter.className}>
+                    {children}
+                    
+                    {/* Importing the shadcn Toaster for showing Messages */}
+                    <Toaster />
+                    
+                </body>
             </AuthProvider>
 
         </html>
