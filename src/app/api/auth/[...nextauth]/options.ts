@@ -23,17 +23,19 @@ export const authOptions: NextAuthOptions = {
 
         // Adding the Credentials Provider to Validate the Username/Email and Password
         CredentialsProvider({
-            // TODO : Might Need to Change
+            // ! NOTE : We have found the use of 'id'
+            // ? USE : Whenever we call the signIn Function of the auth/next, the first argument that it will take is the 'id' name, that we have defined here
             id: "hiddenEcho-credentials",
             name: "Credentials",
 
             credentials: {
-                emailOrUsername: { label: "Email/Username", type: "text" },
+                identifier: { label: "Email/Username", type: "text" },
                 password: { label: "Password", type: "password" },
             },
 
             // We have to use this Function to authorize, without that it will provide us with the Error
             // This method will return the user if it is successful or it should return the error or null if it is not successful
+            // ? NOTE : To Show the Error Message of our choice, we have to throw the Error with the desired message and throw that error
             // Now, the user that we are returning or coming from the authorize function, will be given to the provider and proceed further
             async authorize(credentials: any): Promise<any> {
 
@@ -45,21 +47,16 @@ export const authOptions: NextAuthOptions = {
                     // Fetching the User with Email or Username
                     const signInUser = await UserModel.findOne({
                         $or: [
-                            { email: credentials.emailOrUsername },
-                            { username: credentials.emailOrUsername }
+                            { email: credentials.identifier },
+                            { username: credentials.identifier }
                         ]
                     })
 
                     // If no user Found with that email or username
                     if (!signInUser) {
                         console.log("[src/app/api/auth/[...nextauth]/options.ts] Error : No user Found with this Email or Username");
-                        return null;
-                    }
-
-                    // If the User is not Verified,
-                    if (!signInUser.isVerified) {
-                        console.log("[src/app/api/auth/[...nextauth]/options.ts] Error : Please Verify Your Account Before Login");
-                        return null;
+                        throw new Error("No user Found with this Email or Username, Make Sure you have Verified Your Account");
+                        // return null;
                     }
 
                     // Now, Checking the Password of the User
@@ -67,17 +64,27 @@ export const authOptions: NextAuthOptions = {
 
                     // If Password Compares and is Correct, then we return the user
                     if (isPasswordCorrect) {
+
+                        // If the User is not Verified, we will show this error only if the user credentials are correct
+                        if (!signInUser.isVerified) {
+                            console.log("[src/app/api/auth/[...nextauth]/options.ts] Error : Please Verify Your Account Before Login");
+                            throw new Error("Please Verify Your Account Before Login");
+                            // return null;
+                        }
+
                         return signInUser;
                     }
                     else {
                         console.log("[src/app/api/auth/[...nextauth]/options.ts] Error : Incorrect Credentials");
-                        return null;
+                        throw new Error("Incorrect Credentials");
+                        // return null;
                     }
 
-                } catch (error) {
+                } catch (error: any) {
                     console.log("[src/app/api/auth/[...nextauth]/options.ts] Error : User Not Authorized Successfully");
                     console.log("[src/app/api/auth/[...nextauth]/options.ts] error : ", error);
-                    return null;
+                    throw new Error(error.message);
+                    // return null;
                 }
             }
 
