@@ -27,7 +27,7 @@ import { useToast } from "@/components/ui/use-toast"
 // Importing useRouter for navigating the user to verify page on success signup
 import { useRouter } from "next/navigation"
 
-// Importing signUpSchema for checking teh signup Data Validation
+// Importing signUpSchema for checking the signup Data Validation
 import { signUpSchema } from "@/zod-schemas/signUpSchema"
 
 // Importing APIResponse Schema to send the API Response
@@ -44,7 +44,7 @@ import { Check, Loader2, X } from "lucide-react"
 
 
 // Component Function for the Signup
-export default function SignInPage() {
+export default function SignUpPage() {
 
 
     // In Username, for every input change or character input, we want to check for the unique username in Database using API Request
@@ -124,7 +124,7 @@ export default function SignInPage() {
                         // Getting the Response From the API
                         const checkUsernameUniqueResponse = await axios.get(`/api/check-username-unique?username=${username}`);
 
-                        // console.log("[src/app/(auth)/sign-in/page.tsx] checkUsernameUniqueResponse : ", checkUsernameUniqueResponse);
+                        // console.log("[src/app/(auth)/sign-up/page.tsx] checkUsernameUniqueResponse : ", checkUsernameUniqueResponse);
 
                         // Setting the Unique Username Status Message
                         setUniqueUsernameStatus(checkUsernameUniqueResponse.data.message)
@@ -137,7 +137,7 @@ export default function SignInPage() {
                         // Getting the Errors in the form of AxiosError and Also defining the type to APIResponse to structure the error object
                         const axiosError = error as AxiosError<APIResponse>
 
-                        // console.log("[src/app/(auth)/sign-in/page.tsx] axiosError : ", axiosError);
+                        // console.log("[src/app/(auth)/sign-up/page.tsx] axiosError : ", axiosError);
 
                         // Setting the Unique Username Status Message
                         setUniqueUsernameStatus(axiosError.response?.data.message ?? "Error Checking the Username")
@@ -183,7 +183,7 @@ export default function SignInPage() {
             // Calling the API for signing up
             const signUpResponse = await axios.post<APIResponse>('/api/sign-up', data);
 
-            // console.log("[src/app/(auth)/sign-in/page.tsx] signUpResponse : ", signUpResponse);
+            // console.log("[src/app/(auth)/sign-up/page.tsx] signUpResponse : ", signUpResponse);
 
             if (signUpResponse.data.success) {
                 // Showing the Success Toast Message
@@ -213,7 +213,7 @@ export default function SignInPage() {
             // Getting the Error Message
             let errorMessage = axiosError.response?.data.message
 
-            // console.log("[src/app/(auth)/sign-in/page.tsx] axiosError : ", axiosError);
+            // console.log("[src/app/(auth)/sign-up/page.tsx] axiosError : ", axiosError);
 
             // Showing the Error Toast Message
             toast({
