@@ -11,9 +11,14 @@ export const signUpSchema = z.object({
     username: usernameValidation,
 
     // Validation for Email
-    email: z.string().email({ message: "Invalid Email Address" }),
+    email: z
+        .string()
+        .min(1, { message: "Email is required" })
+        .email({ message: "Invalid Email Address" }),
 
     // Validation for Password
-    password: z.string().min(6, { message: "Password Must Be Minimum 6 Characters" })
+    password: z
+        .string()
+        .min(6, { message: "Password Must Be Minimum 6 Characters" })
 
 })
