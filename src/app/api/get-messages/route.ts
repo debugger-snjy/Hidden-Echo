@@ -81,7 +81,7 @@ export async function GET(nextRequest: Request) {
         ])
 
         // Checking whether user Found
-        if (!userWithAllMessages || userWithAllMessages.length === 0) {
+        if (!userWithAllMessages) {
             console.log("[src/app/api/get-messages/route.ts] Error : User Not Found");
             return Response.json(
                 {
@@ -90,6 +90,21 @@ export async function GET(nextRequest: Request) {
                 },
                 {
                     status: 401
+                }
+            )
+        }
+
+        // If No Message have been present in the user account, Sending the Success Response with Empty all messages
+        if (userWithAllMessages.length === 0) {
+            console.log("[src/app/api/get-messages/route.ts] User with all its messages Found");
+            return Response.json(
+                {
+                    message: "No Messages Yet !!",
+                    success: true,
+                    allmessages: []
+                },
+                {
+                    status: 200
                 }
             )
         }
