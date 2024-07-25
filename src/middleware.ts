@@ -11,8 +11,13 @@ import { getToken } from 'next-auth/jwt'
 export async function middleware(request: NextRequest) {
 
     // getToken() will take the request as parameter
-    const token = await getToken({ req: request })
+    // ! NOTE : Getting token value as NULL as by default the raw is false
+    // ? Solution : We have to set raw as true to get the JWT Token else we will get null
+    const token = await getToken({ req: request, raw: true })
     const url = request.nextUrl;
+
+    console.log("[src/middleware.ts] url.pathname : ", url.pathname);
+    console.log("[src/middleware.ts] token : ", token);
 
     if (token &&
         (
@@ -20,9 +25,11 @@ export async function middleware(request: NextRequest) {
             url.pathname.startsWith('/sign-up') ||
             url.pathname.startsWith('/sign-verify') ||
             // TODO : We have blocked the home page '/' as it will be just a presentational page, Remove that if needed
-            url.pathname.startsWith('/')
+            // Also removed the condition, `url.pathname.startsWith('/')` as it will always be true
+            url.pathname === '/' // For only Home Page
         )
     ) {
+        console.log("[src/middleware.ts] Yes working here !!");
         return NextResponse.redirect(new URL('/dashboard', request.url))
     }
 }

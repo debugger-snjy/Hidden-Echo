@@ -80,11 +80,13 @@ export async function POST(nextRequest: Request) {
             userId,
             {
                 $set: {
-                    isAcceptingMessages: isAcceptingMessages
+                    isAcceptingMessage: isAcceptingMessages
                 }
             },
             { new: true }
         )
+
+        console.log("[src/app/api/accept-messages/route.ts] updatedLoggedInUser : ", updatedLoggedInUser);
 
         // If updated user not found or updated
         if (!updatedLoggedInUser) {

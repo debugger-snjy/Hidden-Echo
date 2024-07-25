@@ -44,7 +44,7 @@ import * as z from 'zod';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Importing the Verify Page Component
-export default function verifyPage() {
+export default function VerifyPage() {
 
     // Creating the router object
     const router = useRouter();

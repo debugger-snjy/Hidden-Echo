@@ -12,7 +12,7 @@ export interface APIResponse {
 
     // Optional Parameters that we might need sometime while sending response
     user?: User;
-    messages?: Array<Message>;
+    allmessages?: Array<Message>;
     isAcceptingMessages?: boolean;
 
     // TODO : Might Add Other Fields if Needed
