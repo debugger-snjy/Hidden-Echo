@@ -26,7 +26,11 @@ export default function RootLayout({
 
                     <Navbar />
                     
-                    {children}
+                    <div className="min-h-[83vh]">{children}</div>
+
+                    <footer className="text-center text-lg p-3 md:p-6 bg-gray-900 text-white">
+                        © 2024 Hidden Echo | All rights reserved.
+                    </footer>
 
                     {/* Importing the shadcn Toaster for showing Messages */}
                     <Toaster />
