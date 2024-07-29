@@ -30,6 +30,9 @@ import { Loader2, RefreshCcw } from "lucide-react"
 // Importing useSession from the next-auth
 import { useSession } from "next-auth/react"
 
+// Importing the Router
+import { useRouter } from "next/navigation"
+
 // Importing react hooks
 import { useCallback, useEffect, useState } from "react"
 
@@ -59,6 +62,9 @@ export default function DashboardPage() {
 
     // Getting the toast variable to show the toast messages
     const { toast } = useToast()
+
+    // Creating the router object
+    const router = useRouter();
 
     // Creating the session variable to get the data from the session
     const { data: session } = useSession();
@@ -267,7 +273,21 @@ export default function DashboardPage() {
         setIsPageLoading(true)
 
         // If User is NOT Logged in 
-        if (!session || !session.user) return
+        if (!session || !session.user) {
+
+            // Showing the Toast for Not Logged In and redirecting user to the signin page
+            console.log("[src/app/(app)/dashboard/page.tsx] Hello 1")
+            toast({
+                title: "User Not Logged In",
+                description: "Kindly Login into Your Account",
+                variant: "destructive"
+            })
+
+            // Redirecting user to the sign-in page
+            router.replace("/sign-in");
+            setIsPageLoading(false);
+            return
+        }
 
         // Fetching all the messages
         fetchAllMessages();
@@ -280,7 +300,7 @@ export default function DashboardPage() {
         // Stopped the Page Loading
         setIsPageLoading(false)
 
-    }, [session, setValue, fetchAcceptMessagesStatus, fetchAllMessages])
+    }, [session, setValue, fetchAcceptMessagesStatus, fetchAllMessages, setMessages])
 
     if (isPageLoading) {
         // TODO : Add a Proper Loading Spinner

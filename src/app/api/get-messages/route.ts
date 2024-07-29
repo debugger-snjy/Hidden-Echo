@@ -113,7 +113,7 @@ export async function GET(nextRequest: Request) {
         console.log("[src/app/api/get-messages/route.ts] User with all its messages Found");
         return Response.json(
             {
-                message: "User Found with all Messages",
+                message: "All Messages Fetched",
                 success: true,
                 allmessages: userWithAllMessages[0].allmessages
             },
