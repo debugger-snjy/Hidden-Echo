@@ -22,20 +22,21 @@ function MessageCard({ message, onMessageDelete }: MessageCardProps) {
         const deleteMessageResponse = await axios.delete<APIResponse>(`/api/delete-message/${message._id}`)
 
         if (deleteMessageResponse.data.success) {
+            console.log("[src/components/MessageCard.tsx] message : ", message);
+            onMessageDelete(`${message._id}`)
             toast({
-                title: "Message Deletion Failed",
+                title: "Message Deleted Successfully",
                 description: deleteMessageResponse.data.message,
-                variant: "destructive"
             })
         }
 
         else {
             toast({
-                title: "Message Deleted Successfully",
+                title: "Message Deletion Failed",
                 description: deleteMessageResponse.data.message,
+                variant: "destructive"
             })
 
-            onMessageDelete(message.id)
         }
 
     }
