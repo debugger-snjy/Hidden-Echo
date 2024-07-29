@@ -19,6 +19,7 @@ export async function middleware(request: NextRequest) {
     console.log("[src/middleware.ts] url.pathname : ", url.pathname);
     console.log("[src/middleware.ts] token : ", token);
 
+    // Condition for Logged In User, and URL that are not accessible when user is logged In
     if (token &&
         (
             url.pathname.startsWith('/sign-in') ||
@@ -29,8 +30,18 @@ export async function middleware(request: NextRequest) {
             url.pathname === '/' // For only Home Page
         )
     ) {
-        console.log("[src/middleware.ts] Yes working here !!");
+        console.log("[src/middleware.ts] User is Logged In !!");
         return NextResponse.redirect(new URL('/dashboard', request.url))
+    }
+
+    // Condition, if user is not logged in but navigating to the dashboard
+    if (!token &&
+        (
+            url.pathname.startsWith('/dashboard')
+        )
+    ) {
+        console.log("[src/middleware.ts] User is NOT Logged In !!");
+        return NextResponse.redirect(new URL('/sign-in', request.url))
     }
 }
 
