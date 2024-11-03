@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hidden Echo
+
+Hidden Echo is a secure, anonymous messaging platform that prioritizes user privacy. Users are required to verify their accounts through a two-factor authentication process, ensuring the uniqueness of usernames. Once verified, users can access a personalized dashboard where they can manage URL settings, toggle message notifications, and engage in anonymous conversations with others.
+
+## Technologies Used
+
+- HTML
+- CSS
+- Javascript
+- Tailwind
+- Next JS
+- [Resend](resend.com)
 
 ## Getting Started
 
-First, run the development server:
+This section explains how to set up your project locally for development.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Make sure you have the following installed on your local machine:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Node.js**: [Download and install](https://nodejs.org/)
+- **npm** or **yarn**: Comes bundled with Node.js.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Installation
 
-## Learn More
+To install the project, follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   git clone https://github.com/debugger-snjy/Hidden-Echo
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. **Installing the Node Packages:**
 
-## Deploy on Vercel
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Running the Application:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```bash
+   npm run dev
+   ```
+
+## Screenshots
+
+Login Page:
+
+![Login Page](screenshots/HiddenEcho.png)
