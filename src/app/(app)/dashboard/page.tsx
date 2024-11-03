@@ -271,18 +271,15 @@ export default function DashboardPage() {
 
         // Starting the Page Loading
         setIsPageLoading(true)
+        
+        console.log("Session : ",session);
 
         // If User is NOT Logged in 
         if (!session || !session.user) {
 
             // Showing the Toast for Not Logged In and redirecting user to the signin page
             console.log("[src/app/(app)/dashboard/page.tsx] Hello 1")
-            toast({
-                title: "User Not Logged In",
-                description: "Kindly Login into Your Account",
-                variant: "destructive"
-            })
-
+            
             // Redirecting user to the sign-in page
             router.replace("/sign-in");
             setIsPageLoading(false);
@@ -299,6 +296,15 @@ export default function DashboardPage() {
 
         // Stopped the Page Loading
         setIsPageLoading(false)
+
+        // Showing the User Not Logged In Message after page loading completed
+        if((!session || !session.user) && !isPageLoading){
+            toast({
+                title: "User Not Logged In",
+                description: "Kindly Login into Your Account",
+                variant: "destructive"
+            })
+        }
 
     }, [session, setValue, fetchAcceptMessagesStatus, fetchAllMessages, setMessages])
 

@@ -59,7 +59,7 @@ function Navbar() {
 
     return (
         <nav className='p-4 md:p-6 shadow-md'>
-            <div className='container mx-auto flex flex-col md:flex-row justify-between items-center'>
+            <div className='flex flex-col md:flex-row justify-between items-center'>
                 <a className='text-xl font-bold mb-4 md:mb-0' href="#">Hidden Echo</a>
                 {
                     session ?
@@ -71,9 +71,14 @@ function Navbar() {
                         )
                         :
                         (
-                            <Link href={buttonText === 'Login' ? '/sign-in' : '/sign-up'}>
-                                <Button className='w-full md:w-auto'>{buttonText}</Button>
-                            </Link>
+                            <div className='flex space-x-4'>
+                                <Link href={'/sign-in'}>
+                                    <Button className='w-full md:w-auto'>Login</Button>
+                                </Link>
+                                <Link href={'/sign-up'}>
+                                    <Button className='w-full md:w-auto'>Sign Up</Button>
+                                </Link>
+                            </div>
                         )
                 }
             </div>
